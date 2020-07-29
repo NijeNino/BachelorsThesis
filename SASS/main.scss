@@ -1,0 +1,129 @@
+$boja: #fff;
+$boja1: #2d2d2d;
+$tekst-font: 'tekst';
+$naslov-font:'naslov';
+
+
+@font-face {
+  font-family: $naslov-font;
+  src: url(fonts/american_captain.otf);
+}
+
+@font-face {
+  font-family: $tekst-font;
+  src: url(fonts/open_sans.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: $tekst-font;
+}
+
+body {
+  background-image: url('../img/mala_slika3.jpeg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+
+h1, h2, h3 {
+  font-family: $naslov-font;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 100px;
+  color: $boja1;
+}
+
+h3 {
+  font-size: 36px;
+  color: $boja;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+}
+
+.new_container {
+  width: 80%;
+  margin: auto;
+  background: $boja;
+}
+
+.clear {
+  clear: both;
+}
+
+@import 'meni';
+@import 'pocetna';
+
+div {
+  &.okvir {
+    margin: 64px auto;
+  }
+  &.telo {
+    height: 70px;
+  }
+}
+
+@import 'o_nama';
+
+div {
+  &.desna.slika, &.leva.slika {
+    float: left;
+    width: 55%;
+    margin-top: 40px;
+    height: 320px;
+  }
+  &.levi.tekst, &.desni.tekst {
+    float: right;
+    width: 45%;
+    height: 400px;
+    background: $boja1;
+    color: $boja;
+    position: relative;
+  }
+  &.levi.tekst h3, &.desni.tekst h3 {
+    padding: 25px 25px 0 25px;
+  }
+  &.levi.tekst p, &.desni.tekst p {
+    padding: 25px;
+    text-align: justify;
+  }
+}
+
+@import 'blog';
+
+button.btn {
+  position: absolute;
+  right: 25px;
+  bottom: 25px;
+  background: transparent;
+  border-radius: 5px;
+  border: 2px solid #eee;
+  text-align: center;
+  padding: 10px 20px;
+  color: $boja;
+  &:hover {
+    background: #eee;
+    color: $boja1;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+@import 'proizvodi';
+@import 'galerija';
+@import 'kontakt';
+@import 'footer';
+@import 'modal';
+@import 'responsive';

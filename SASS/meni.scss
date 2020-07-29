@@ -1,0 +1,51 @@
+div.meni {
+  ul {
+    list-style-type: none;
+    li {
+      display: inline-block;
+      text-transform: uppercase;
+      padding: 25px 10px;
+      &:first-child {
+        padding-left: 0px;
+      }
+      a {
+        color: #2d2d2d;
+        font-weight: bold;
+        &:hover {
+          color: #58631F;
+          border-bottom: 2px solid #58631F;
+        }
+      }
+    }
+  }
+  &.animacija {
+    position: fixed;
+    width: 80%;
+    background: #fff;
+    animation-name: desktop_meni;
+    animation-duration: 1800ms;
+    z-index: 999;
+  }
+}
+
+@keyframes desktop_meni {
+  0% {
+    transform: translateY(-65px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.burger {
+  position: fixed;
+  right: 25px;
+  padding: 18px;
+  display: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}

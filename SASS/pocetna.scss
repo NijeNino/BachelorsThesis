@@ -1,0 +1,31 @@
+div {
+  &.bg {
+    width: 100%;
+    max-width: 100%;
+    height: 760px;
+    background-image: url('../img/background1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+  &.naslov {
+    position: absolute;
+    left: 65px;
+    bottom: 145px;
+    width: 36%;
+    max-width: 40%;
+    height: 280px;
+    max-height: 320px;
+    padding: 45px;
+    background: rgba(255, 255, 255, 0.45);
+    border-radius: 15px;
+    h2 {
+      line-height: 98px;
+    }
+    h3 {
+      font-size: 56px;
+      line-height: 65px;
+    }
+  }
+}

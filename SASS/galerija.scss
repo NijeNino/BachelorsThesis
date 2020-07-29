@@ -1,0 +1,36 @@
+.desktop_hide {
+  display: none;
+}
+
+.galerija img {
+  width: 100%;
+  height: auto;
+  display: none;
+  animation-name: opacity;
+  animation-duration: 1800ms;
+}
+
+.naredna {
+  margin-right: 2%;
+  float: left;
+  width: 16%;
+  margin-top: 10%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.prethodna {
+  float: left;
+  width: 16%;
+  margin-top: 10%;
+  text-align: center;
+  cursor: pointer;
+  margin-left: 2%;
+}
+
+.trenutna {
+  float: left;
+  width: 60%;
+  margin-left: 2%;
+  margin-right: 2%;
+}

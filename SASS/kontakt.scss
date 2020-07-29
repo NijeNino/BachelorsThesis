@@ -1,0 +1,70 @@
+$boja1: #2d2d2d;
+
+
+.center {
+  text-align: center;
+  margin: auto;
+}
+
+h2.top64 {
+  margin-top: 64px;
+}
+
+div {
+  &.kontakt {
+    text-align: center;
+    height: 720px;
+    background-image: url('../img/background3.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+  &.kontakt_forma {
+    position: absolute;
+    bottom: 120px;
+    right: 10%;
+    width: 45%;
+    height: 400px;
+    padding: 45px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.65);
+    h3 {
+      text-align: left;
+      color: $boja1;
+      padding-bottom: 25px;
+    }
+    input {
+      width: 96%;
+      padding: 10px 2%;
+      max-width: 96%;
+      margin-bottom: 10px;
+      border: 1px solid $boja1;
+      background: transparent;
+    }
+    textarea {
+      width: 96%;
+      padding: 10px 2%;
+      max-width: 96%;
+      height: 124px;
+      margin-bottom: 10px;
+      resize: none;
+      border: 1px solid $boja1;
+      background: transparent;
+    }
+    button {
+      float: right;
+      background: transparent;
+      border: 1px solid $boja1;
+      text-align: center;
+      padding: 10px 30px;
+      color: $boja1;
+      &:hover {
+        background: $boja1;
+        color: #eee;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+  }
+}

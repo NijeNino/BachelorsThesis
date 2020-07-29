@@ -1,0 +1,207 @@
+$boja: #fff;
+$boja1: #2d2d2d;
+
+@media only screen and (max-width: 640px) {
+  h2 {
+    font-size: 96px;
+    text-align: center;
+  }
+  h3 {
+    font-size: 36px;
+  }
+  .new_container, .container {
+    width: 100%;
+  }
+  .desktop_hide {
+    display: block;
+  }
+  .mobile_hide {
+    display: none;
+  }
+  div.meni {
+    min-height: 60px;
+    ul {
+      display: none;
+      &.animirani_meni {
+        display: block;
+        position: fixed;
+        animation-name: desktop_meni;
+        animation-duration: 1800ms;
+        z-index: 999;
+      }
+      li {
+        float: left;
+        width: 100%;
+        max-width: 100%;
+        padding: 20px 60px !important;
+        background: $boja;
+        &:last-child {
+          padding-bottom: 600px !important;
+        }
+      }
+    }
+  }
+  .burger {
+    display: block;
+    z-index: 999999;
+  }
+  div {
+    &.naslov {
+      left: 0;
+      right: 0;
+      bottom: 200px;
+      height: 320px;
+      width: 100%;
+      max-width: 100%;
+      border-radius: 0;
+      padding-left: 0;
+      padding-right: 0;
+      text-align: center;
+      z-index: 1;
+      h2 {
+        line-height: 120px;
+      }
+      h3 {
+        font-size: 64px;
+        line-height: 60px;
+      }
+    }
+    &.desna.slika, &.leva.slika, &.levi.tekst, &.desni.tekst {
+      width: 100%;
+      height: 360px;
+    }
+    &.proizvodi_bg {
+      background-attachment: fixed;
+    }
+    &.proizvodi h2 {
+      margin-bottom: 48px;
+    }
+    &.proizvod {
+      width: 100%;
+      margin: 15px auto;
+      height: 360px;
+      > div.opis {
+        display: block;
+      }
+    }
+  }
+  .trenutna {
+    width: 100%;
+    margin: 0;
+  }
+  .prethodna {
+    float: left;
+    width: 46%;
+  }
+  .naredna {
+    float: right;
+    width: 46%;
+  }
+  div.kontakt_forma {
+    position: absolute;
+    bottom: 120px;
+    right: 0;
+    left: 0;
+    width: 90%;
+    max-width: 100%;
+    height: 400px;
+    padding: 45px 5%;
+    border-radius: 0;
+    h3 {
+      text-align: left;
+      color: $boja1;
+      padding-bottom: 25px;
+    }
+    input {
+      width: 96%;
+      padding: 10px 2%;
+      max-width: 96%;
+      margin-bottom: 10px;
+      border: 1px solid $boja1;
+      background: transparent;
+    }
+    textarea {
+      width: 96%;
+      padding: 10px 2%;
+      max-width: 96%;
+      height: 124px;
+      margin-bottom: 10px;
+      resize: none;
+      border: 1px solid $boja1;
+      background: transparent;
+    }
+    button {
+      float: right;
+      background: transparent;
+      border: 1px solid $boja1;
+      text-align: center;
+      padding: 10px 30px;
+      color: #2d2d2d;
+      &:hover {
+        background: $boja1;
+        color: #eee;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+  }
+  footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    color: $boja;
+    background: rgba(0, 0, 0, 0.75);
+  }
+  div.modal_telo {
+    position: relative;
+    width: 80%;
+    min-height: 320px;
+  }
+  .m_ne {
+    display: none;
+  }
+  div.zatvori {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border-radius: 50%;
+    border: 1px solid $boja1;
+    color: $boja1;
+    text-align: center;
+    width: 30px;
+    padding-top: 4px;
+    height: 26px;
+    &:hover {
+      background: $boja1;
+      color: $boja;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+  .levi_modal, .desni_modal {
+    float: left;
+    width: 50%;
+  }
+  .levi_modal img {
+    width: 90%;
+    height: auto;
+    padding-top: 40px;
+  }
+  .desni_modal h3 {
+    color: $boja1;
+  }
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0.45;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

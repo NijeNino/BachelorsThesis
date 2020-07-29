@@ -1,0 +1,99 @@
+$boja: #fff;
+$boja1: #2d2d2d;
+
+div {
+  &.up_btn {
+    display: none;
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    text-align: center;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.75);
+    color: #000;
+    width: 50px;
+    height: 35px;
+    padding-top: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover {
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.45);
+    }
+    &.animacija {
+      animation-name: desktop_meni;
+      animation-duration: 1800ms;
+      z-index: 999;
+      display: block;
+    }
+  }
+  &.modal {
+    position: fixed;
+    z-index: 999999999999;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+  }
+  &.modal_telo {
+    position: relative;
+    width: 60%;
+    height: 320px;
+    border-radius: 15px;
+    background: $boja;
+    padding: 45px;
+    margin: 100px auto;
+    animation-duration: 1800ms;
+    animation-name: animacija_ld;
+  }
+  &.zatvori {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border-radius: 50%;
+    border: 1px solid $boja1;
+    color: $boja1;
+    text-align: center;
+    width: 30px;
+    padding-top: 4px;
+    height: 26px;
+    &:hover {
+      background: $boja1;
+      color: $boja;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+}
+
+@keyframes animacija_ld {
+  0% {
+    transform: translateX(-120px);
+    opacity: 0.45;
+  }
+
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+
+.levi_modal {
+  img {
+    width: 90%;
+    height: auto;
+    padding-top: 40px;
+  }
+  float: left;
+  width: 50%;
+}
+
+.desni_modal {
+  float: left;
+  width: 50%;
+  h3 {
+    color: $boja1;
+  }
+}

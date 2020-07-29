@@ -1,0 +1,62 @@
+div {
+  &.proizvodi_bg {
+    padding-top: 26px;
+    padding-bottom: 48px;
+    background-image: url('../img/background2.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+  &.proizvodi h2 {
+    text-align: center;
+    color: #fff;
+  }
+  &.proizvod {
+    width: 29.5%;
+    margin: 15px 0 15px 30px;
+    height: 220px;
+    float: left;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    position: relative;
+    &.br1 {
+      background-image: url('../img/proizvodi/b01.jpg');
+    }
+    &.br2 {
+      background-image: url('../img/proizvodi/b02.jpg');
+    }
+    &.br3 {
+      background-image: url('../img/proizvodi/b03.jpg');
+    }
+    &.br4 {
+      background-image: url('../img/proizvodi/b04.jpg');
+    }
+    &.br5 {
+      background-image: url('../img/proizvodi/b05.jpeg');
+    }
+    &.br6 {
+      background-image: url('../img/proizvodi/b06.jpg');
+    }
+    > div.opis {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      text-align: center;
+      display: none;
+      ul li {
+        list-style-type: none;
+        &:first-child {
+          padding-top: 45px;
+        }
+      }
+    }
+    &:hover > div.opis {
+      display: block;
+    }
+  }
+}

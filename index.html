@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Seminarski rad - Veb dizajn | Bicikl</title>
+	<link rel="stylesheet" href="css/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	
+	<meta name="authoring-tool" content="Adobe_Animate_CC">
+<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+<script src="js/animacija.js"></script>
+<script>
+var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
+function init() {
+	canvas = document.getElementById("canvas");
+	anim_container = document.getElementById("animation_container");
+	dom_overlay_container = document.getElementById("dom_overlay_container");
+	images = images||{};
+	ss = ss||{};
+	var loader = new createjs.LoadQueue(false);
+	loader.addEventListener("fileload", handleFileLoad);
+	loader.addEventListener("complete", handleComplete);
+	loader.loadManifest(lib.properties.manifest);
+}
+function handleFileLoad(evt) {	
+	if (evt.item.type == "image") { images[evt.item.id] = evt.result; }	
+}
+function handleComplete(evt) {
+	//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
+	var queue = evt.target;
+	var ssMetadata = lib.ssMetadata;
+	for(i=0; i<ssMetadata.length; i++) {
+		ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
+	}
+	exportRoot = new lib.Untitled2();
+	stage = new createjs.Stage(canvas);
+	stage.addChild(exportRoot);	
+	//Registers the "tick" event listener.
+	fnStartAnimation = function() {
+		createjs.Ticker.setFPS(lib.properties.fps);
+		createjs.Ticker.addEventListener("tick", stage);
+	}	    
+	//Code to support hidpi screens and responsive scaling.
+	function makeResponsive(isResp, respDim, isScale, scaleType) {		
+		var lastW, lastH, lastS=1;		
+		window.addEventListener('resize', resizeCanvas);		
+		resizeCanvas();		
+		function resizeCanvas() {			
+			var w = lib.properties.width, h = lib.properties.height;			
+			var iw = window.innerWidth, ih=window.innerHeight;			
+			var pRatio = window.devicePixelRatio || 1, xRatio=iw/w, yRatio=ih/h, sRatio=1;			
+			if(isResp) {                
+				if((respDim=='width'&&lastW==iw) || (respDim=='height'&&lastH==ih)) {                    
+					sRatio = lastS;                
+				}				
+				else if(!isScale) {					
+					if(iw<w || ih<h)						
+						sRatio = Math.min(xRatio, yRatio);				
+				}				
+				else if(scaleType==1) {					
+					sRatio = Math.min(xRatio, yRatio);				
+				}				
+				else if(scaleType==2) {					
+					sRatio = Math.max(xRatio, yRatio);				
+				}			
+			}			
+			canvas.width = w*pRatio*sRatio;			
+			canvas.height = h*pRatio*sRatio;
+			canvas.style.width = dom_overlay_container.style.width = anim_container.style.width =  w*sRatio+'px';				
+			canvas.style.height = anim_container.style.height = dom_overlay_container.style.height = h*sRatio+'px';
+			stage.scaleX = pRatio*sRatio;			
+			stage.scaleY = pRatio*sRatio;			
+			lastW = iw; lastH = ih; lastS = sRatio;		
+		}
+	}
+	makeResponsive(true,'both',false,1);	
+	fnStartAnimation();
+}
+</script>
+</head>
+<body onload="init();" style="margin:0px;">
+<div class="new_container">
+	<div class="bg">
+		<div class="meni ">
+			<div class="container">
+				<span onclick="toggle_meni();" class="burger">MENI</span>
+				<ul>
+					<li onclick="toggle_meni()" class="m_pocetna"><a href="#pocetna">Početna</a></li>
+					<li onclick="toggle_meni()" class="m_onama"><a href="#onama">O nama</a></li>
+					<li onclick="toggle_meni()" class="m_proizvodi"><a href="#proizvodi">Proizvodi</a></li>
+					<li onclick="toggle_meni()" class="m_akcije"><a href="#akcije">Blog</a></li>
+					<li onclick="toggle_meni()" class="m_galerija"><a href="#galerija">Galerija</a></li>
+					<li onclick="toggle_meni()" class="m_kontakt"><a href="#kontakt">Kontakt</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="container" id="pocetna">
+			<div class="naslov">
+				<h2>IMBRONJEV BICIKL</h2>
+				<h3>18 GODINA SA VAMA</h3>
+			
+			</div>
+		</div>
+	</div>
+	<div class="clear" id="onama"></div>
+
+	<div class="container okvir">
+		<div class="telo">
+			<h2>O nama</h2> 
+			<div id="animation_container" style="background-color:rgba(255, 255, 255, 0.00); width:600px; height:70px">
+		<canvas id="canvas" width="600" height="70" style="position: absolute; display: block; background-color:rgba(255, 255, 255, 0.00);"></canvas>
+		<div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:600px; height:70px; position: absolute; left: 0px; top: 0px; display: block;">
+		</div>
+	</div>
+			<div class="leva slika bg1"></div>
+			<div class="desni tekst">
+			<h3>Istorijat...</h3>
+				<p>Tržište Srbije je vrlo brzo prepoznalo vrednosti Imbronjev brenda što dokazuju brojni zadovoljni poslovni partneri i distributeri širom zemlje. Danas Imbronjev zapošljava 150 radnika i sa svojim proizvodima je pored tržišta Srbije prisutan i na insotranom tržištu. Pored sertifikata ISO 9001 pokrenuta je sertifikacija za ISO 14001 i OHSAS 18001. Ovo ukazuje na društvenu odgovornost preduzeća i naravno očuvanju vrednosti prema najvišim međunarodnim standardima. </p>
+			</div>
+		</div>
+		<div class="clear" id="proizvodi"></div>
+	</div>
+
+
+
+
+
+<div class="proizvodi_bg">
+	<div class="okvir proizvodi">
+				<h2>Proizvodi</h2>
+		
+			<div class="proizvod br1">
+				<div class="opis">
+					<ul>
+						<li>Model: IMT875442-C</li>
+						<li>Cena: 27.000 din</li>
+					</ul>
+					<button onclick="otvori_modal(
+					'img/proizvodi/b01.jpg',
+					'IMT875442-C', 
+					'27.000 din', 
+					'Svi bicikli se kao i odeća mogu razvrstati u nekoliko osnovnih veličina XS, S, M, L, XL, XXL. Neki proizvođači imaju i međuveličine poput S/M, M/L,..... Uopšteno gledano, ako kupujete rekreativni bicikl koji ćete za rekreaciju i koristiti onda se možete voditi sledećim dimenzijama. XS za visinu ispod 160cm, S 155-172cm, M 165-182cm, L 175-192cm, XL 185-202cm, XXL za visinu iznad 195cm.');" class="btn">Saznaj više...</button>
+				</div>
+			</div>
+			<div class="proizvod br2">
+				<div class="opis">
+					<ul>
+						<li>Model: IGR8425-1</li>
+						<li>Cena: 32.000 din</li>
+					</ul>
+					<button onclick="otvori_modal(
+					'img/proizvodi/b02.jpg',
+					'IGR8425-1', 
+					'32.000 din', 
+					'Svi bicikli se kao i odeća mogu razvrstati u nekoliko osnovnih veličina XS, S, M, L, XL, XXL. Neki proizvođači imaju i međuveličine poput S/M, M/L,..... Uopšteno gledano, ako kupujete rekreativni bicikl koji ćete za rekreaciju i koristiti onda se možete voditi sledećim dimenzijama. XS za visinu ispod 160cm, S 155-172cm, M 165-182cm, L 175-192cm, XL 185-202cm, XXL za visinu iznad 195cm.');" class="btn">Saznaj više...</button>
+				</div>
+			</div>
+			<div class="proizvod br3">
+				<div class="opis">
+					<ul>
+						<li>Model: LID114-M</li>
+						<li>Cena: 89.000 din</li>
+					</ul>
+					<button onclick="otvori_modal(
+					'img/proizvodi/b03.jpg',
+					'LID114-M', 
+					'89.000 din', 
+					'Svi bicikli se kao i odeća mogu razvrstati u nekoliko osnovnih veličina XS, S, M, L, XL, XXL. Neki proizvođači imaju i međuveličine poput S/M, M/L,..... Uopšteno gledano, ako kupujete rekreativni bicikl koji ćete za rekreaciju i koristiti onda se možete voditi sledećim dimenzijama. XS za visinu ispod 160cm, S 155-172cm, M 165-182cm, L 175-192cm, XL 185-202cm, XXL za visinu iznad 195cm.');" class="btn">Saznaj više...</button>
+				</div>
+			</div>
+			<div class="proizvod br4">
+				<div class="opis">
+					<ul>
+						<li>Model: DCP5102</li>
+						<li>Cena: 18.000 din</li>
+					</ul>
+					<button onclick="otvori_modal(
+					'img/proizvodi/b04.jpg',
+					'DCP5102', 
+					'18.000 din', 
+					'Svi bicikli se kao i odeća mogu razvrstati u nekoliko osnovnih veličina XS, S, M, L, XL, XXL. Neki proizvođači imaju i međuveličine poput S/M, M/L,..... Uopšteno gledano, ako kupujete rekreativni bicikl koji ćete za rekreaciju i koristiti onda se možete voditi sledećim dimenzijama. XS za visinu ispod 160cm, S 155-172cm, M 165-182cm, L 175-192cm, XL 185-202cm, XXL za visinu iznad 195cm.');" class="btn">Saznaj više...</button>
+				</div>
+			</div>
+			<div class="proizvod br5">
+				<div class="opis">
+					<ul>
+						<li>Model: BO17LDRT-A</li>
+						<li>Cena: 29.000 din</li>
+					</ul>
+					<button onclick="otvori_modal(
+					'img/proizvodi/b05.jpeg',
+					'BO17LDRT-A', 
+					'29.000 din', 
+					'Svi bicikli se kao i odeća mogu razvrstati u nekoliko osnovnih veličina XS, S, M, L, XL, XXL. Neki proizvođači imaju i međuveličine poput S/M, M/L,..... Uopšteno gledano, ako kupujete rekreativni bicikl koji ćete za rekreaciju i koristiti onda se možete voditi sledećim dimenzijama. XS za visinu ispod 160cm, S 155-172cm, M 165-182cm, L 175-192cm, XL 185-202cm, XXL za visinu iznad 195cm.');" class="btn">Saznaj više...</button>
+				</div>
+			</div>
+			<div class="proizvod br6">
+				<div class="opis">
+					<ul>
+						<li>Model: IMT875442-A</li>
+						<li>Cena: 167.000 din</li>
+					</ul>
+					<button onclick="otvori_modal(
+					'img/proizvodi/b06.jpg',
+					'IMT875442-A', 
+					'167.000 din', 
+					'Svi bicikli se kao i odeća mogu razvrstati u nekoliko osnovnih veličina XS, S, M, L, XL, XXL. Neki proizvođači imaju i međuveličine poput S/M, M/L,..... Uopšteno gledano, ako kupujete rekreativni bicikl koji ćete za rekreaciju i koristiti onda se možete voditi sledećim dimenzijama. XS za visinu ispod 160cm, S 155-172cm, M 165-182cm, L 175-192cm, XL 185-202cm, XXL za visinu iznad 195cm.');" class="btn">Saznaj više...</button>
+				</div>
+			</div>
+		<div class="clear" id="akcije"></div>
+	</div>
+</div>
+
+	<div class="container okvir">
+		<div class="telo">
+			<h2>Blog</h2>
+			<div class="leva slika bg2"></div>
+			<div class="desni tekst">
+			<h3>Osigurajte vaš bicikl!</h3>
+				<p>Proleće je period kada počinje nova biciklistička sezona. Konstantno poskupljenja goriva je razlog više da kraće gradske relacije prelazite isključivo na vašem biciklu! On predstavlja transportno sredstvo koje će doprineti održavanju vaše forme, uštedi vašeg budžeta ali i očuvanju naše životne sredine! Nažalost, potrebno je svega nekoliko trenutaka nepažnje da neko ukrade vaš bezmotorni dvotočkaš.</p>
+				<button onclick="otvori_modal_akcije('img/mala_slika2.jpeg',
+'Osigurajte vaš bicikl!',
+'Postoji nekoliko stvari koje možete učiniti kako bi lopovima otežali da ukradu vaš bicikl: Registrujte vaš bicikl, Postavite ID-TAG stiker ili karticu na vaš bicikl, Propisno osigurajte vaš bicikl pre nego što ga ostavite negde.'
+);" class="btn">Saznaj više...</button>
+			</div>
+			<div class="clear"><br><br></div>
+			<div class="desna slika bg3"></div>
+			<div class="levi tekst">
+			<h3>Obratite pažnju na...</h3>
+				<p>Na stotine bicikala ukrade se svake godine na ulicama naše zemlje. Pobrinite se da VAŠ BAJS ne bude jedan od njih! Sigurnosne sajle za zaključavanje bicikala ne treba da budu primarno sredstvo zaštite vašeg bicikla u gradu. Kvalitetnije „U-lock“ brave pružaju nešto pouzdaniju zaštitu.</p>
+				<button onclick="otvori_modal_akcije('img/mala_slika3.jpeg',
+'Obratite pažnju na...',
+'Zaštitnom bravom i sajlama obuhvatite obavezno ram i točkove vašeg bicikla. Takođe proverite objekat za koji vezujete bravu, ukoliko je isti oštećen ili klimav, lopovi će lako odneti ceo vaš bicikl. Mnogi bicikli bivaju ukradeni iz hodnika zgrada, dvorišta, garaža, podruma… Dobro zaključajte vaš bicikl za čvrst fiksni objekat, čak i ako je mesto naizgled “sigurno“.'
+);" class="btn">Saznaj više...</button>
+			</div>
+		</div>
+		<div class="clear" id="galerija"></div>
+	</div>
+
+	
+<div class="proizvodi_bg">
+	<div class="okvir proizvodi galerija">
+			
+			<h2>Galerija</h2>
+		
+			<div onclick="plusDivs(-1)" class="prethodna mobile_hide">
+				<img class="pr_slika" src="img/gallery/g01.jpeg" alt="">
+				<img class="pr_slika" src="img/gallery/g02.jpg" alt="">
+				<img class="pr_slika" src="img/gallery/g03.jpeg" alt="">
+				<img class="pr_slika" src="img/gallery/g04.jpeg" alt="">
+				<img class="pr_slika" src="img/gallery/g00.jpg" alt="">
+				<h3>prethodna</h3>
+			</div>
+			<div class="trenutna">
+				<img class="tr_slika" src="img/gallery/g01.jpeg" alt="">
+				<img class="tr_slika" src="img/gallery/g02.jpg" alt="">
+				<img class="tr_slika" src="img/gallery/g03.jpeg" alt="">
+				<img class="tr_slika" src="img/gallery/g04.jpeg" alt="">
+				<img class="tr_slika" src="img/gallery/g00.jpg" alt="">
+			</div>
+			<div onclick="plusDivs(-1)" class="prethodna desktop_hide">
+				<img class="pr_slika2" src="img/gallery/g01.jpeg" alt="">
+				<img class="pr_slika2" src="img/gallery/g02.jpg" alt="">
+				<img class="pr_slika2" src="img/gallery/g03.jpeg" alt="">
+				<img class="pr_slika2" src="img/gallery/g04.jpeg" alt="">
+				<img class="pr_slika2" src="img/gallery/g00.jpg" alt="">
+				<h3>prethodna</h3>
+			</div>
+			<div onclick="plusDivs(1)" class="naredna">
+				<img class="nr_slika" src="img/gallery/g01.jpeg" alt="">
+				<img class="nr_slika" src="img/gallery/g02.jpg" alt="">
+				<img class="nr_slika" src="img/gallery/g03.jpeg" alt="">
+				<img class="nr_slika" src="img/gallery/g04.jpeg" alt="">
+				<img class="nr_slika" src="img/gallery/g00.jpg" alt="">
+				<h3>naredna</h3>
+			</div>
+		
+		<div class="clear" id="kontakt"></div>
+	</div>
+</div>
+
+
+	<h2 class="center top64">Kontakt</h2>
+<div class="kontakt">
+		<div class="kontakt_forma">
+			<h3>Kontaktirajte nas...</h3>
+			<form action="" onsubmit="return validacija()">
+				<input class="ime" type="text" placeholder="*Ime">
+				<input class="email" type="text" placeholder="*Email adresa">
+				<textarea name="" id="" placeholder="Poruka"></textarea>
+				<button>Pošalji</button>
+			</form>
+			
+	
+		</div>
+	<footer>Copyright | Ninoslav Imbronjev</footer>
+</div>
+
+<div class="up_btn">UP</div>
+<div class="modal modal_proizvodi">
+	<div class="modal_telo">
+		<div class="levi_modal">
+			<img class="proizvod_slika" src="" alt="proizvod">
+		</div>
+		<div class="desni_modal">
+			<h3 class="modal_naslov"></h3>
+			<p class="modal_model"></p>
+			<p class="modal_cena"></p>
+			<p class="modal_opis"></p>
+		</div>
+		<div class="zatvori">x</div>
+	</div>
+</div>
+
+<div class="modal modal_akcije">
+	<div class="modal_telo">
+		<div class="levi_modal">
+			<img class="proizvod_slika" src="" alt="proizvod">
+		</div>
+		<div class="desni_modal">
+		<br class="m_ne"><br>
+			<h3 class="modal_naslov"></h3>
+			<p class="modal_opis"></p>
+		</div>
+		<div class="zatvori">x</div>
+	</div>
+</div>
+</div>
+<script type="text/javascript">prikazi(1);</script>
+
+</body>
+</html>
